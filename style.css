@@ -28,7 +28,8 @@ section {
 /* Sections that manage their own spacing — do not add global section padding */
 .hero-section,
 .header-section,
-.impact-section {
+.impact-section,
+.recognition-section {
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -2794,7 +2795,7 @@ section {
 
 /* recognition section */
 .recognition-section {
-  padding: 32px 0 40px;
+  padding: 24px 0 28px;
   background: url('images/bg image recoginition page.png') center center / cover no-repeat;
 }
 
@@ -2810,7 +2811,7 @@ section {
   font-weight: 800;
   line-height: 1.15;
   text-align: center;
-  margin: 0 0 28px;
+  margin: 0 0 18px;
   background: linear-gradient(90deg, #2e1a6c 0%, #4527a0 42%, #00bcd4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -2831,7 +2832,7 @@ section {
   flex: 1 1 0;
   min-width: 0;
   border-radius: 22px;
-  padding: 12px 14px;
+  padding: 8px 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2842,12 +2843,12 @@ section {
 }
 
 .rec-card-small {
-  height: 348px;
+  height: 252px;
 }
 
 .rec-card-main {
   flex: 1.5 1 0;
-  height: 448px;
+  height: 380px;
 }
 
 .rec-card img {
@@ -2881,55 +2882,56 @@ section {
 
   .rec-card-small {
     width: 212px;
-    height: 328px;
+    height: 236px;
   }
 
   .rec-card-main {
     flex: 0 0 auto;
     width: 296px;
-    height: 418px;
+    height: 360px;
   }
 }
 
 @media screen and (max-width: 991px) {
   .recognition-title {
     font-size: 36px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
 
   .rec-card-small {
     width: 198px;
-    height: 308px;
+    height: 224px;
   }
 
   .rec-card-main {
     width: 276px;
-    height: 388px;
+    height: 340px;
   }
 }
 
 @media screen and (max-width: 575px) {
   .recognition-section {
-    padding: 28px 0 36px;
+    padding: 20px 0 24px;
   }
 
   .recognition-title {
     font-size: 28px;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
 
   .recognition-grid {
     gap: 8px;
+    align-items: center;
   }
 
   .rec-card-small {
     width: 208px;
-    height: 312px;
+    height: 228px;
   }
 
   .rec-card-main {
     width: 264px;
-    height: 358px;
+    height: 320px;
   }
 }
 

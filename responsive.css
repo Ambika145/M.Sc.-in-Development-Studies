@@ -408,12 +408,12 @@ textarea:focus-visible,
 
   .rec-card-small {
     width: min(78vw, 208px);
-    height: clamp(260px, 52vh, 308px);
+    height: clamp(210px, 42vh, 236px);
   }
 
   .rec-card-main {
     width: min(88vw, 264px);
-    height: clamp(300px, 58vh, 388px);
+    height: clamp(280px, 48vh, 340px);
   }
 
   .hero-consent span {
