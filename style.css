@@ -477,7 +477,7 @@ section {
   flex: 1;
   color: #fff;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.4;
   padding: 0 16px;
   border-right: 1px solid rgba(255, 255, 255, 0.45);
@@ -489,12 +489,13 @@ section {
 
 .hero-info-item strong {
   font-weight: 700;
-  font-size: 18px;
+  font-size: inherit;
 }
 
 .hero-info-item span {
   display: block;
-  font-size: 16px;
+  font-size: inherit;
+  font-weight: 700;
 }
 
 @media screen and (min-width: 1200px) {
@@ -531,16 +532,11 @@ section {
     font-size: 22px;
   }
 
-  .hero-info-item {
-    font-size: 18px;
-  }
-
-  .hero-info-item strong {
-    font-size: 19px;
-  }
-
+  .hero-info-item,
+  .hero-info-item strong,
   .hero-info-item span {
-    font-size: 17px;
+    font-size: 18px;
+    font-weight: 700;
   }
 }
 
@@ -636,11 +632,14 @@ section {
     flex: 1 1 33%;
     border-right: none;
     font-size: 14px;
+    font-weight: 700;
     padding: 8px 6px;
   }
 
-  .hero-info-item strong {
-    font-size: 15px;
+  .hero-info-item strong,
+  .hero-info-item span {
+    font-weight: 700;
+    font-size: inherit;
   }
 }
 
@@ -689,10 +688,13 @@ section {
   .hero-info-item {
     flex: 1 1 50%;
     font-size: 13px;
+    font-weight: 700;
   }
 
-  .hero-info-item strong {
-    font-size: 14px;
+  .hero-info-item strong,
+  .hero-info-item span {
+    font-weight: 700;
+    font-size: inherit;
   }
 }
 
@@ -732,6 +734,13 @@ section {
     border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     padding: 10px 8px;
     font-size: 14px;
+    font-weight: 700;
+  }
+
+  .hero-info-item strong,
+  .hero-info-item span {
+    font-weight: 700;
+    font-size: inherit;
   }
 
   .hero-info-item:last-child {
