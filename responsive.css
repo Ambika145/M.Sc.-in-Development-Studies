@@ -57,7 +57,7 @@ svg {
 .know-more-section .container,
 .recognition-container,
 .faq-section .faq-container,
-.enquire-section .container {
+.enquire-section .enquire-container {
   padding-left: var(--site-gutter);
   padding-right: var(--site-gutter);
 }
@@ -101,7 +101,7 @@ svg {
 .difference-title,
 .recognition-title,
 .faq-section .section-title,
-.enquire-section h2.section-title {
+.enquire-heading {
   font-size: clamp(1.75rem, 4.2vw, 2.8125rem);
 }
 
@@ -185,6 +185,23 @@ textarea:focus-visible,
     grid-template-columns: 1fr;
   }
 
+  .enquire-section .enquire-card {
+    grid-template-columns: 1fr;
+  }
+
+  .enquire-info-panel {
+    min-height: auto;
+    padding: 2rem 1.5rem 2.5rem;
+  }
+
+  .enquire-form-panel {
+    padding: 1.5rem 1.25rem 1.25rem;
+  }
+
+  .enquire-npf-scroll {
+    max-height: 420px;
+  }
+
   .enquire-section .form-container > [class*="col-"] {
     flex: 0 0 100%;
     max-width: 100%;
@@ -238,7 +255,7 @@ textarea:focus-visible,
     bottom: -18%;
     max-width: 100%;
     width: 86%;
-    transform: translateX(calc(-50% - 1.5rem));
+    transform: translateX(calc(-50% - 3rem));
   }
 
   .hero-student-stack {
@@ -315,17 +332,27 @@ textarea:focus-visible,
     padding: 14px 16px;
   }
 
-  .enquire-section h2.section-title {
-    margin-bottom: 20px;
+  .enquire-heading {
+    font-size: clamp(1.75rem, 6vw, 2.25rem);
+    margin-bottom: 1.25rem;
+  }
+
+  .enquire-card {
+    border-radius: 28px;
+  }
+
+  .enquire-npf-scroll {
+    max-height: 380px;
+  }
+
+  .enquire-info-panel .info-section h2 {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    line-height: 1.35;
   }
 
   .know-more-cta {
     width: 100%;
     max-width: 320px;
-  }
-  .enquire-section .info-section h2 {
-    font-size: clamp(1.25rem, 4vw, 1.75rem);
-    line-height: 1.35;
   }
 
   .hero-phone-field {
@@ -448,7 +475,7 @@ textarea:focus-visible,
   .difference-container,
   .faculty-container,
   .faq-section .faq-container,
-  .enquire-section .container,
+  .enquire-section .enquire-container,
   .hero-section .hero-container,
   .hero-info-bar > .container {
     max-width: 1440px;
@@ -467,7 +494,7 @@ textarea:focus-visible,
   .difference-container,
   .faculty-container,
   .faq-section .faq-container,
-  .enquire-section .container {
+  .enquire-section .enquire-container {
     max-width: 1520px;
   }
 
@@ -488,7 +515,7 @@ textarea:focus-visible,
 
 /* Footer */
 .site-footer {
-  background: #fff;
+  background: #f3eef8;
   padding: clamp(20px, 4vw, 32px) var(--site-gutter);
   border-top: 1px solid #eee;
 }

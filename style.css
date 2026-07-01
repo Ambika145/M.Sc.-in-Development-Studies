@@ -269,7 +269,7 @@ section {
   position: absolute;
   left: 50%;
   bottom: -28%;
-  transform: translateX(calc(-50% - 1.25rem));
+  transform: translateX(calc(-50% - 2.75rem));
   width: 88%;
   max-width: 26rem;
   aspect-ratio: 1;
@@ -3069,18 +3069,79 @@ section {
 }
 
 /* enquiry section */
-.enquire-section .container {
+.enquire-section {
+  background: #f3eef8;
+  padding: 48px 0 56px;
+}
+
+.enquire-section .enquire-container {
   max-width: 1320px;
 }
 
-.enquire-section h2 {
-  font-size: 45px;
+.enquire-heading {
+  font-size: 2.8125rem;
   font-weight: 750;
-  color: #6b2d9e;
+  color: #1a237e;
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.15;
 }
 
-.enquire-section h2 span {
-  color: #007BFF;
+.enquire-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(26, 31, 92, 0.16);
+  width: 100%;
+  max-width: 100%;
+}
+
+.enquire-form-panel {
+  background: linear-gradient(135deg, #2b1f84 0%, #5a22d1 48%, #008dd2 100%);
+  padding: 2rem 2rem 1.75rem;
+}
+
+.enquire-info-panel {
+  background: #0f1654;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem 2.5rem;
+  min-height: 420px;
+}
+
+.enquire-npf-scroll {
+  max-height: 480px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.55) rgba(255, 255, 255, 0.15);
+}
+
+.enquire-npf-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.enquire-npf-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+.enquire-npf-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 3px;
+}
+
+.enquire-form-panel .npf_wgts,
+.enquire-form-panel .npf_wgts iframe {
+  display: block;
+  width: 100% !important;
+  max-width: 100%;
+  min-height: 520px;
+  border: none;
+  background: transparent;
 }
 
 .enquire-section .form-container {
@@ -3162,28 +3223,28 @@ section {
 }
 
 .info-section {
-            color: white;
-            padding: 50px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+  color: #fff;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
 
+.enquire-info-panel .info-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #fff;
+}
 
-        .info-section h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            line-height: 1.3;
-            font-weight: 600;
-            color: white;
-        }
-
-        .info-text {
-            color: #fbbf24;
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 35px;
-        }
+.enquire-info-panel .info-text {
+  color: #fbbf24;
+  font-size: 1rem;
+  line-height: 1.65;
+  margin-bottom: 0;
+  font-weight: 500;
+}
 
         .contact-item {
             display: flex;
@@ -3353,8 +3414,8 @@ section {
     font-size: 0.85rem;
   }
 
-  .enquire-section .form-container {
-    border-radius: 30px;
+  .enquire-section .enquire-card {
+    border-radius: 28px;
   }
 
   .submit-btn {
