@@ -29,7 +29,15 @@ section {
 .hero-section,
 .header-section,
 .impact-section,
-.recognition-section {
+.features-section,
+.msc-section,
+.skills-section,
+.recognition-section,
+.know-more-section,
+.difference-section,
+.faculty-section,
+.faq-section,
+.enquire-section {
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -1519,6 +1527,17 @@ section {
   }
 }
 
+@media screen and (max-width: 991px) {
+  .impact-cards-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .impact-box {
+    min-height: auto;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .impact-section-title {
     font-size: 32px;
@@ -1526,7 +1545,7 @@ section {
 
   .impact-banner {
     padding: 48px 0;
-    min-height: 480px;
+    min-height: auto;
   }
 
   .impact-cards-row {
@@ -1550,10 +1569,12 @@ section {
 .skills-section {
   background: linear-gradient(180deg, #f5f0ff 0%, #faf8ff 40%, #fff 100%);
   padding: 64px 0 72px;
+  overflow-x: hidden;
 }
 
 .skills-container {
   max-width: 1280px;
+  width: 100%;
   padding-left: 24px;
   padding-right: 24px;
 }
@@ -1574,10 +1595,12 @@ section {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 44px 36px;
+  width: 100%;
 }
 
 .skill-card {
   grid-column: span 2;
+  min-width: 0;
 }
 
 .skills-grid .skill-card:nth-child(7) {
@@ -1678,7 +1701,7 @@ section {
   margin: 0;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1199px) {
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 32px 28px;
@@ -1688,6 +1711,44 @@ section {
   .skills-grid .skill-card:nth-child(7),
   .skills-grid .skill-card:nth-child(8) {
     grid-column: auto;
+  }
+
+  .skills-section-title {
+    font-size: 38px;
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 22px;
+  }
+
+  .skill-card,
+  .skills-grid .skill-card:nth-child(7),
+  .skills-grid .skill-card:nth-child(8) {
+    grid-column: auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .skills-section {
+    padding: 44px 0 52px;
+  }
+
+  .skills-section-title {
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+
+  .skill-card-inner {
+    gap: 14px;
+  }
+
+  .skill-card-title {
+    font-size: 20px;
+    padding-top: 16px;
   }
 }
 
@@ -1704,6 +1765,12 @@ section {
   .skills-grid {
     grid-template-columns: 1fr;
     gap: 28px;
+  }
+
+  .skill-card-inner {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .skill-card-title {
