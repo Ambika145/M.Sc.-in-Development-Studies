@@ -62,33 +62,51 @@ svg {
   padding-right: var(--site-gutter);
 }
 
-/* Header & hero — aligned left edge, less inset than other sections */
-.header-section .container-header {
-  max-width: 1320px;
-  --bs-gutter-x: 0;
-  padding-left: 16px;
-  padding-right: 32px;
+/* Header logos live inside hero-section — no separate header block */
+.hero-section .hero-header {
+  padding: 8px 0 6px;
 }
 
 /* Hero aligns with header — fixed padding, no fluid gutter */
-.hero-section .hero-container,
-.hero-info-bar > .container {
+.hero-section {
+  --hero-edge-left: 16px;
+  --hero-edge-right: 32px;
+}
+
+.hero-section .hero-container {
   max-width: 1320px;
   --bs-gutter-x: 0;
-  padding-left: 16px;
-  padding-right: 32px;
+  padding-left: var(--hero-edge-left);
+  padding-right: var(--hero-edge-right);
 }
 
 @media screen and (min-width: 1200px) {
-  .header-section .container-header {
-    padding-left: 24px;
-    padding-right: 48px;
+  .hero-section {
+    --hero-edge-left: 24px;
+    --hero-edge-right: 48px;
   }
+}
 
-  .hero-section .hero-container,
-  .hero-info-bar > .container {
-    padding-left: 24px;
-    padding-right: 48px;
+/* Desktop — fill viewport (100% wide layouts use min-width 1320 rules in style.css) */
+@media screen and (min-width: 1320px) {
+  .hero-section {
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+}
+
+/* 125% scaling — slightly smaller student so info bar stays fully visible */
+@media screen and (min-width: 992px) and (max-width: 1319px) {
+  .hero-student-img {
+    transform: translate(1.1rem, 2.85rem) scale(1.1);
+  }
+}
+
+/* 100% browser zoom — wide viewport */
+@media screen and (min-width: 1320px) {
+  .hero-main {
+    flex: 0 1 auto;
+    padding-bottom: 2rem;
   }
 }
 
@@ -215,7 +233,6 @@ textarea:focus-visible,
   }
 
   .hero-section,
-  .header-section,
   .impact-section,
   .features-section,
   .msc-section,
@@ -230,11 +247,18 @@ textarea:focus-visible,
     padding-bottom: 0;
   }
 
-  .header-section .container-header,
-  .hero-section .hero-container,
-  .hero-info-bar > .container {
-    padding-left: 16px;
-    padding-right: 16px;
+  .hero-section {
+    --hero-edge-left: 16px;
+    --hero-edge-right: 16px;
+  }
+
+  .hero-section .hero-container {
+    padding-left: var(--hero-edge-left);
+    padding-right: var(--hero-edge-right);
+  }
+
+  .hero-header {
+    padding: 6px 0 6px;
   }
 
   .hero-student-stack {
@@ -377,7 +401,7 @@ textarea:focus-visible,
   }
 
   .hero-info-bar {
-    margin-top: 1.75rem;
+    margin-top: 0;
   }
 
   .hero-info-item {
@@ -640,16 +664,18 @@ textarea:focus-visible,
 
 /* Large desktops & ultrawide — cap content width */
 @media screen and (min-width: 1600px) {
-  .header-section .container-header,
+  .hero-section .hero-container,
   .features-container,
   .msc-container,
   .skills-section .skills-container,
   .difference-container,
   .faculty-container,
   .faq-section .faq-container,
-  .enquire-section .enquire-container,
-  .hero-section .hero-container,
-  .hero-info-bar > .container {
+  .enquire-section .enquire-container {
+    max-width: 1440px;
+  }
+
+  .hero-info-inner {
     max-width: 1440px;
   }
 
@@ -659,7 +685,8 @@ textarea:focus-visible,
 }
 
 @media screen and (min-width: 1920px) {
-  .header-section .container-header,
+  .hero-section .hero-container,
+  .hero-section .hero-container,
   .features-container,
   .msc-container,
   .skills-section .skills-container,
@@ -670,8 +697,11 @@ textarea:focus-visible,
     max-width: 1520px;
   }
 
-  .hero-section .hero-container,
-  .hero-info-bar > .container {
+  .hero-section .hero-container {
+    max-width: 1520px;
+  }
+
+  .hero-info-inner {
     max-width: 1520px;
   }
 }

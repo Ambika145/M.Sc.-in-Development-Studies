@@ -27,7 +27,6 @@ section {
 
 /* Sections that manage their own spacing — do not add global section padding */
 .hero-section,
-.header-section,
 .impact-section,
 .features-section,
 .msc-section,
@@ -83,30 +82,53 @@ section {
   }
 } */
 
-/* Header */
-.header-section {
+/* Hero Section (first section: header + hero + info bar) */
+.hero-section {
   background: #fff;
-  padding: 20px 0 12px;
-}
-
-.header-section .container-header {
-  max-width: 1320px;
+  padding: 0;
+  position: relative;
+  overflow: visible;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  --bs-gutter-x: 0;
-  padding-left: 16px;
-  padding-right: 32px;
+  max-width: 100%;
+  --hero-edge-left: 16px;
+  --hero-edge-right: 32px;
 }
 
-@media screen and (min-width: 1200px) {
-  .header-section .container-header {
-    padding-left: 24px;
-    padding-right: 48px;
+@media screen and (min-width: 992px) {
+  .hero-section {
+    justify-content: flex-start;
+  }
+
+  .hero-section .hero-container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hero-main {
+    flex: 1 1 auto;
+    align-items: end;
   }
 }
 
-.header-logos {
+@media screen and (min-width: 1320px) {
+  .hero-section {
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+}
+
+.hero-header {
+  width: 100%;
+  padding: 8px 0 6px;
+  flex-shrink: 0;
+}
+
+.hero-section .header-logos {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -126,15 +148,6 @@ section {
   max-width: min(40vw, 340px);
 }
 
-/* Hero Section */
-.hero-section {
-  background: #fff;
-  padding: 16px 0 0;
-  position: relative;
-  overflow: visible;
-  z-index: 1;
-}
-
 .hero-section.section-global {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
@@ -146,21 +159,15 @@ section {
   margin-left: auto;
   margin-right: auto;
   --bs-gutter-x: 0;
-  padding-left: 16px;
-  padding-right: 32px;
+  padding-left: var(--hero-edge-left);
+  padding-right: var(--hero-edge-right);
   padding-bottom: 0;
   position: relative;
   z-index: 1;
-}
-
-.hero-info-bar > .container {
-  max-width: 1320px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  --bs-gutter-x: 0;
-  padding-left: 32px;
-  padding-right: 32px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  overflow: visible;
 }
 
 .hero-main {
@@ -169,8 +176,9 @@ section {
   align-items: end;
   column-gap: 0.75rem;
   row-gap: 0;
-  padding: 0.5rem 0 0;
+  padding: 0.25rem 0 2rem;
   width: 100%;
+  flex: 1 1 auto;
 }
 
 .hero-left,
@@ -458,12 +466,23 @@ section {
 
 .hero-info-bar {
   background: linear-gradient(90deg, #311b92 0%, #3949ab 35%, #00bcd4 100%);
-  padding: 20px 0;
-  margin-top: 1.75rem;
-  position: relative;
-  z-index: 10;
+  padding: 22px 0 24px;
+  margin: 0;
   width: 100%;
-  clear: both;
+  max-width: 100%;
+  position: relative;
+  z-index: 20;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+@media screen and (min-width: 992px) {
+  .hero-info-bar {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
 }
 
 .hero-info-inner {
@@ -471,6 +490,11 @@ section {
   justify-content: space-between;
   align-items: center;
   text-align: center;
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  padding-left: var(--hero-edge-left, 16px);
+  padding-right: var(--hero-edge-right, 32px);
 }
 
 .hero-info-item {
@@ -508,14 +532,23 @@ section {
     max-width: 360px;
   }
 
-  .hero-section .hero-container,
-  .hero-info-bar > .container {
-    padding-left: 24px;
-    padding-right: 48px;
+  .hero-section {
+    --hero-edge-left: 24px;
+    --hero-edge-right: 48px;
+  }
+
+  .hero-section .hero-container {
+    padding-left: var(--hero-edge-left);
+    padding-right: var(--hero-edge-right);
   }
 
   .hero-main {
+    padding-bottom: 2rem;
     column-gap: 1rem;
+  }
+
+  .hero-info-bar {
+    padding: 22px 0 24px;
   }
 
   .hero-student-stack {
@@ -540,6 +573,71 @@ section {
   }
 }
 
+/* 100% browser zoom — wide viewport (≥1320px); enquire form sits lower */
+@media screen and (min-width: 1320px) {
+  .hero-main {
+    flex: 0 1 auto;
+  }
+
+  .hero-section .hero-right {
+    align-self: end !important;
+    margin-top: 6.5rem !important;
+    transform: none !important;
+  }
+}
+
+/* 125% browser zoom — narrower viewport (<1320px); keep enquire placement, fit info bar */
+@media screen and (min-width: 992px) and (max-width: 1319px) {
+  .hero-section {
+    min-height: auto;
+    justify-content: flex-start;
+  }
+
+  .hero-section .hero-container {
+    flex: 0 1 auto;
+    justify-content: flex-start;
+  }
+
+  .hero-main {
+    flex: 0 1 auto;
+    padding-bottom: 0.75rem;
+  }
+
+  .hero-header {
+    padding: 6px 0 4px;
+  }
+
+  .header-logo-img {
+    max-height: 82px;
+  }
+
+  .hero-student-img {
+    transform: translate(1.1rem, 2.85rem) scale(1.1);
+  }
+
+  .hero-info-bar {
+    flex-shrink: 0;
+    padding: 16px 0 20px;
+  }
+
+  .hero-section .hero-right {
+    align-self: start !important;
+    transform: none !important;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1319px) {
+  .hero-section .hero-right {
+    margin-top: -0.5rem !important;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .hero-section .hero-right {
+    margin-top: 0 !important;
+  }
+}
+
 .text-purple {
   color: #6b2d9e;
   font-weight: 800;
@@ -553,6 +651,7 @@ section {
     align-items: center;
     gap: 24px;
     min-height: auto;
+    padding-bottom: 2.5rem;
   }
 
   .hero-left {
@@ -587,8 +686,9 @@ section {
   }
 
   .hero-info-bar {
-    margin-top: 1.75rem;
-    z-index: 10;
+    margin-top: 0;
+    z-index: 20;
+    padding: 18px 12px 20px;
   }
 
   .hero-right {
@@ -814,6 +914,8 @@ section {
   background-color: #fff;
   padding: 56px 0 64px;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
   --features-card-radius: 32px;
 }
 
@@ -3432,9 +3534,9 @@ section {
   .header-logo-img{
     max-height: 48px;
   }
-  .header-section{
-    padding-top:10px;
-    padding-bottom:10px;
+  .hero-header {
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
     
     .section-title {
