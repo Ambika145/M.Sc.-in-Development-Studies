@@ -87,14 +87,6 @@ svg {
   }
 }
 
-/* Desktop — fill viewport (100% wide layouts use min-width 1320 rules in style.css) */
-@media screen and (min-width: 1320px) {
-  .hero-section {
-    min-height: 100svh;
-    min-height: 100dvh;
-  }
-}
-
 /* 125% scaling — slightly smaller student so info bar stays fully visible */
 @media screen and (min-width: 992px) and (max-width: 1319px) {
   .hero-student-img {
@@ -102,11 +94,20 @@ svg {
   }
 }
 
-/* 100% browser zoom — wide viewport */
+/* Desktop — 100% wide viewport only */
 @media screen and (min-width: 1320px) {
+  .hero-section {
+    min-height: 100svh;
+    height: auto;
+  }
+
   .hero-main {
     flex: 0 1 auto;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .hero-student-img {
+    transform: translate(1.25rem, 3.35rem) scale(1.16);
   }
 }
 

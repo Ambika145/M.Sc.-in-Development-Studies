@@ -118,7 +118,8 @@ section {
 @media screen and (min-width: 1320px) {
   .hero-section {
     min-height: 100svh;
-    min-height: 100dvh;
+    height: auto;
+    overflow: visible;
   }
 }
 
@@ -573,15 +574,42 @@ section {
   }
 }
 
-/* 100% browser zoom — wide viewport (≥1320px); enquire form sits lower */
+/* 100% browser zoom — wide viewport (≥1320px) */
 @media screen and (min-width: 1320px) {
+  .hero-section .hero-container {
+    flex: 0 1 auto;
+    justify-content: flex-start;
+    min-height: 0;
+  }
+
   .hero-main {
     flex: 0 1 auto;
+    padding-bottom: 1rem;
+  }
+
+  .hero-header {
+    padding: 6px 0 4px;
+  }
+
+  .header-logo-img {
+    max-height: 90px;
+  }
+
+  .hero-student-img {
+    transform: translate(1.25rem, 3.35rem) scale(1.16);
+  }
+
+  .hero-info-bar {
+    flex: 0 0 auto;
+    flex-shrink: 0;
+    margin-top: auto;
+    padding: 18px 0 22px;
+    overflow: visible;
   }
 
   .hero-section .hero-right {
     align-self: end !important;
-    margin-top: 6.5rem !important;
+    margin-top: 5.5rem !important;
     transform: none !important;
   }
 }
@@ -3664,4 +3692,5 @@ section {
 img, video, iframe {
   max-width: 100%;
   height: auto;
+}
 }
