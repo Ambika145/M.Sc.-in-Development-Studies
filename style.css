@@ -113,12 +113,21 @@ section {
   .hero-main {
     align-items: end;
   }
+
+  .hero-left {
+    align-self: start;
+    margin-top: 0;
+    transform: none;
+  }
 }
 
 .hero-header {
   width: 100%;
-  padding: 8px 0 6px;
+  padding: 8px 0 12px;
   flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  background: #fff;
 }
 
 .hero-section .header-logos {
@@ -131,7 +140,9 @@ section {
 
 .header-logo-img {
   height: auto;
-  max-height: clamp(64px, 6.5vw, 105px);
+  /* Fixed height so the logos render at the same size at every Windows scaling
+     level (100/110/125/150%) instead of shrinking with the viewport */
+  max-height: 92px;
   width: auto;
   max-width: min(44vw, 400px);
   object-fit: contain;
@@ -171,7 +182,8 @@ section {
   align-items: end;
   column-gap: clamp(0.5rem, 1.4vw, 1.25rem);
   row-gap: 0;
-  padding: 0.25rem 0 clamp(0.5rem, 1.2vw, 1rem);
+  padding: clamp(8px, 1.2vw, 16px) 0 clamp(0.5rem, 1.2vw, 1rem);
+  margin-top: 0;
   width: 100%;
 }
 
@@ -188,12 +200,15 @@ section {
   position: relative;
   z-index: 3;
   overflow: visible;
+  align-self: start;
+  margin-top: 0;
+  transform: none;
 }
 
 .hero-title {
-  font-size: clamp(1.85rem, 2.55vw, 2.5rem);
+  font-size: clamp(1.9rem, 2.95vw, 3.3rem);
   font-weight: 800;
-  line-height: 1.08;
+  line-height: 1.1;
   margin-bottom: 0;
   color: #000;
   overflow: visible;
@@ -201,10 +216,10 @@ section {
 
 .hero-title-gradient {
   display: block;
-  font-size: clamp(2rem, 2.85vw, 2.75rem);
+  font-size: clamp(2.1rem, 3.3vw, 3.65rem);
   font-weight: 800;
   line-height: 1.12;
-  margin-top: 0.375rem;
+  margin-top: 0.625rem;
   overflow: visible;
   background: linear-gradient(90deg, #1a237e 0%, #4527a0 55%, #7b1fa2 100%);
   -webkit-background-clip: text;
@@ -216,12 +231,12 @@ section {
   border: none;
   border-top: 2.5px solid #222;
   width: 100%;
-  margin: clamp(12px, 1.4vw, 18px) 0 clamp(14px, 1.5vw, 20px);
+  margin: clamp(16px, 1.8vw, 24px) 0 clamp(18px, 2vw, 26px);
   opacity: 0.85;
 }
 
 .hero-subtitle {
-  font-size: clamp(0.95rem, 1.3vw, 1.375rem);
+  font-size: clamp(1rem, 1.6vw, 1.75rem);
   font-weight: 700;
   letter-spacing: 0.4px;
   text-transform: uppercase;
@@ -234,8 +249,8 @@ section {
   background: linear-gradient(90deg, #00d4e8 0%, #00b8d4 100%);
   color: #fff !important;
   font-weight: 700;
-  font-size: clamp(1.05rem, 1.6vw, 1.5rem);
-  padding: clamp(14px, 1.5vw, 20px) clamp(36px, 4.4vw, 64px);
+  font-size: clamp(1.1rem, 1.8vw, 1.8rem);
+  padding: clamp(15px, 1.7vw, 24px) clamp(38px, 4.8vw, 72px);
   border: none;
   border-radius: 28px;
   cursor: pointer;
@@ -280,10 +295,10 @@ section {
 .hero-globe-wrap {
   position: absolute;
   left: 50%;
-  bottom: -28%;
+  bottom: -14%;
   /* Offset in % (of the globe's own width) so it tracks the student at any scale */
   transform: translateX(calc(-50% - 6%));
-  width: 88%;
+  width: 76%;
   max-width: none;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -317,10 +332,6 @@ section {
   object-fit: contain;
   object-position: right bottom;
   display: block;
-  /* % translate is relative to the image's own box, so the dip onto the info
-     bar stays proportional at every width — no fixed rem that clips when small */
-  transform: translateY(7%);
-  transform-origin: bottom center;
 }
 
 .hero-right {
@@ -331,7 +342,7 @@ section {
   margin: 0;
   flex-shrink: 0;
   position: relative;
-  z-index: 1;
+  z-index: 15;
 }
 
 .hero-enquiry-card {
@@ -535,12 +546,12 @@ section {
   }
 }
 
-/* Desktop: make the hero banner (logos + content + info bar) fill the first
-   screen so the next section ("What's in it for you?") stays below the fold.
-   min-height (not height) means the hero only grows to fill a tall viewport and
-   never clips when content is taller than the screen — so at 125% scaling, where
-   the content already fills, nothing changes. space-between keeps the logos at
-   the top and the content anchored to the bottom on the info bar. */
+/* Desktop: fill the screen. The hero is exactly one viewport tall, the logos are
+   pinned to the top, and the content group is anchored to the bottom so the
+   (enlarged) student image sits just above the info bar — which stays pinned to
+   the bottom and fully visible. The next section is always below the fold. The
+   image and text are scaled up so the banner fills rather than leaving gaps.
+   Alignment only — no translateY, negative margins, or hard-coded offsets. */
 @media screen and (min-width: 1200px) {
   .hero-section {
     min-height: 100svh;
@@ -548,7 +559,117 @@ section {
 
   .hero-section .hero-container {
     flex: 1 1 auto;
-    justify-content: space-between;
+    min-height: 0;
+    justify-content: flex-start;
+    gap: clamp(40px, 5.5vh, 72px);
+  }
+
+  .hero-header {
+    flex: 0 0 auto;
+    padding-top: clamp(8px, 2vh, 22px);
+    padding-bottom: 0;
+  }
+
+  .hero-main {
+    flex: 0 0 auto;
+    margin-top: auto;
+    padding-top: 0;
+    padding-bottom: clamp(0.25rem, 0.8vh, 0.75rem);
+  }
+
+  .hero-left {
+    margin-top: 0;
+  }
+
+  .hero-student-stack {
+    width: 124%;
+    max-width: none;
+  }
+
+  .hero-right {
+    align-self: start;
+    position: relative;
+    top: 0;
+    z-index: 15;
+  }
+
+  .hero-info-bar {
+    flex: 0 0 auto;
+    margin-top: -18px;
+  }
+
+  .hero-section .hero-enquiry-card {
+    position: relative;
+    z-index: 15;
+    transform: translateY(-3.5rem);
+  }
+}
+
+/* 125% scaling / shorter viewports — nudge form up (smaller offset) */
+@media screen and (min-width: 1200px) and (max-height: 920px) {
+  .hero-section .hero-enquiry-card {
+    transform: translateY(-2rem);
+  }
+
+  .hero-right {
+    top: 0;
+  }
+
+  .hero-section .hero-container {
+    gap: clamp(36px, 5vh, 56px);
+  }
+
+  .hero-title {
+    font-size: clamp(1.65rem, 2.6vw, 2.75rem);
+  }
+
+  .hero-title-gradient {
+    font-size: clamp(1.85rem, 2.9vw, 3rem);
+  }
+
+  .hero-divider {
+    margin: clamp(10px, 1.4vh, 16px) 0 clamp(12px, 1.6vh, 18px);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.9rem, 1.4vw, 1.45rem);
+    margin-bottom: clamp(14px, 2vh, 24px);
+  }
+
+  .btn-enroll {
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    padding: clamp(12px, 1.4vw, 18px) clamp(28px, 4vw, 56px);
+  }
+}
+
+/* Short desktop viewports (e.g. a 1920×1080 screen at 150% Windows scaling
+   reports ~1280×720). The tall student figure would push the info bar below
+   the fold, so shrink the figure and tighten vertical spacing to keep the whole
+   banner — including the info bar — on the first screen. Keyed on height so the
+   125% view (~864px tall) is not affected. */
+@media screen and (min-width: 1200px) and (max-height: 820px) {
+  /* Short viewports (e.g. a 1920×1080 screen at 150% scaling ≈ 1280×720).
+     Tighten the vertical rhythm and let the enquiry form use less height so the
+     info bar stays fully visible — WITHOUT reducing the student image. */
+  .hero-header {
+    padding: 4px 0 2px;
+  }
+
+  .hero-main {
+    padding-bottom: clamp(0.25rem, 1vh, 0.6rem);
+  }
+
+  .hero-divider {
+    margin: clamp(8px, 1.4vh, 14px) 0 clamp(10px, 1.6vh, 16px);
+  }
+
+  .hero-subtitle {
+    margin-bottom: clamp(12px, 2vh, 24px);
+  }
+
+  /* The form widget keeps its own internal scroll, so no fields are lost */
+  .hero-npf-scroll {
+    max-height: min(300px, 42vh);
   }
 }
 
@@ -572,6 +693,8 @@ section {
     width: 100%;
     text-align: center;
     padding-bottom: 0;
+    transform: none;
+    margin-top: 0;
   }
 
   .hero-center {
@@ -593,7 +716,7 @@ section {
 
   .hero-globe-wrap {
     max-width: 100%;
-    width: 88%;
+    width: 76%;
   }
 
   .hero-student-img {
