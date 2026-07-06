@@ -87,29 +87,9 @@ svg {
   }
 }
 
-/* 125% scaling — slightly smaller student so info bar stays fully visible */
-@media screen and (min-width: 992px) and (max-width: 1319px) {
-  .hero-student-img {
-    transform: translate(1.1rem, 2.85rem) scale(1.1);
-  }
-}
-
-/* Desktop — 100% wide viewport only */
-@media screen and (min-width: 1320px) {
-  .hero-section {
-    min-height: 100svh;
-    height: auto;
-  }
-
-  .hero-main {
-    flex: 0 1 auto;
-    padding-bottom: 0.25rem;
-  }
-
-  .hero-student-img {
-    transform: translate(1.25rem, 3.35rem) scale(1.16);
-  }
-}
+/* Hero desktop layout is fully fluid in style.css — no viewport-height rules
+   (100svh) and no per-breakpoint image transforms, so the section renders
+   identically (proportionally scaled) across Windows 100%/125%/150% scaling. */
 
 /* Fluid section titles */
 .section-title,
@@ -163,9 +143,10 @@ textarea:focus-visible,
   max-width: 100%;
 }
 
-/* Feature cards — fluid height */
+/* Feature cards — fluid height driven by width (not vh), so card proportions
+   don't change with the viewport height that Windows scaling alters */
 .features-section .feature-card {
-  height: clamp(300px, 58vh, 460px);
+  height: clamp(360px, 26vw, 460px);
 }
 
 /* MSC image — no forced min-height on smaller viewports */
@@ -664,8 +645,11 @@ textarea:focus-visible,
 }
 
 /* Large desktops & ultrawide — cap content width */
+/* On wide viewports let the other sections grow, but keep the HERO pinned to
+   its 1320px container. This makes the 100% view render the hero at the same
+   size it uses at 125% scaling — so the banner "fits as it is like 125%"
+   instead of enlarging and loosening on a wide (100%) monitor. */
 @media screen and (min-width: 1600px) {
-  .hero-section .hero-container,
   .features-container,
   .msc-container,
   .skills-section .skills-container,
@@ -674,20 +658,10 @@ textarea:focus-visible,
   .faq-section .faq-container,
   .enquire-section .enquire-container {
     max-width: 1440px;
-  }
-
-  .hero-info-inner {
-    max-width: 1440px;
-  }
-
-  .hero-student-stack {
-    max-width: 42rem;
   }
 }
 
 @media screen and (min-width: 1920px) {
-  .hero-section .hero-container,
-  .hero-section .hero-container,
   .features-container,
   .msc-container,
   .skills-section .skills-container,
@@ -695,14 +669,6 @@ textarea:focus-visible,
   .faculty-container,
   .faq-section .faq-container,
   .enquire-section .enquire-container {
-    max-width: 1520px;
-  }
-
-  .hero-section .hero-container {
-    max-width: 1520px;
-  }
-
-  .hero-info-inner {
     max-width: 1520px;
   }
 }

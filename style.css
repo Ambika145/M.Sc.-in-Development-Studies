@@ -97,29 +97,21 @@ section {
   --hero-edge-right: 32px;
 }
 
+/* Desktop hero: natural, content-driven height (no viewport-height dependency,
+   so Windows display scaling / different aspect ratios can't stretch or clip it) */
 @media screen and (min-width: 992px) {
   .hero-section {
     justify-content: flex-start;
   }
 
   .hero-section .hero-container {
-    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 
   .hero-main {
-    flex: 1 1 auto;
     align-items: end;
-  }
-}
-
-@media screen and (min-width: 1320px) {
-  .hero-section {
-    min-height: 100svh;
-    height: auto;
-    overflow: visible;
   }
 }
 
@@ -139,14 +131,14 @@ section {
 
 .header-logo-img {
   height: auto;
-  max-height: 95px;
+  max-height: clamp(64px, 6.5vw, 105px);
   width: auto;
-  max-width: min(44vw, 380px);
+  max-width: min(44vw, 400px);
   object-fit: contain;
 }
 
 .header-logo-ideas {
-  max-width: min(40vw, 340px);
+  max-width: min(40vw, 360px);
 }
 
 .hero-section.section-global {
@@ -173,13 +165,14 @@ section {
 
 .hero-main {
   display: grid;
-  grid-template-columns: minmax(18.5rem, 22.5rem) minmax(0, 1fr) 22.5rem;
+  /* Proportional columns (fr): their ratio stays constant at every viewport
+     width, so the layout scales as one unit instead of one column collapsing */
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.5fr) minmax(0, 1fr);
   align-items: end;
-  column-gap: 0.75rem;
+  column-gap: clamp(0.5rem, 1.4vw, 1.25rem);
   row-gap: 0;
-  padding: 0.25rem 0 2rem;
+  padding: 0.25rem 0 clamp(0.5rem, 1.2vw, 1rem);
   width: 100%;
-  flex: 1 1 auto;
 }
 
 .hero-left,
@@ -198,7 +191,7 @@ section {
 }
 
 .hero-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.85rem, 2.55vw, 2.5rem);
   font-weight: 800;
   line-height: 1.08;
   margin-bottom: 0;
@@ -208,7 +201,7 @@ section {
 
 .hero-title-gradient {
   display: block;
-  font-size: 2.75rem;
+  font-size: clamp(2rem, 2.85vw, 2.75rem);
   font-weight: 800;
   line-height: 1.12;
   margin-top: 0.375rem;
@@ -223,16 +216,16 @@ section {
   border: none;
   border-top: 2.5px solid #222;
   width: 100%;
-  margin: 18px 0 20px;
+  margin: clamp(12px, 1.4vw, 18px) 0 clamp(14px, 1.5vw, 20px);
   opacity: 0.85;
 }
 
 .hero-subtitle {
-  font-size: 20px;
+  font-size: clamp(0.95rem, 1.3vw, 1.375rem);
   font-weight: 700;
   letter-spacing: 0.4px;
   text-transform: uppercase;
-  margin-bottom: 32px;
+  margin-bottom: clamp(20px, 2.4vw, 32px);
   color: #111;
   line-height: 1.45;
 }
@@ -241,8 +234,8 @@ section {
   background: linear-gradient(90deg, #00d4e8 0%, #00b8d4 100%);
   color: #fff !important;
   font-weight: 700;
-  font-size: 24px;
-  padding: 20px 64px;
+  font-size: clamp(1.05rem, 1.6vw, 1.5rem);
+  padding: clamp(14px, 1.5vw, 20px) clamp(36px, 4.4vw, 64px);
   border: none;
   border-radius: 28px;
   cursor: pointer;
@@ -274,12 +267,13 @@ section {
 
 .hero-student-stack {
   position: relative;
-  width: 100%;
-  max-width: 38rem;
+  /* Enlargement comes from the column-relative width (scales proportionally at
+     every viewport) instead of a fixed transform: scale() that jumps per breakpoint */
+  width: 112%;
+  max-width: none;
   margin: 0 0 0 auto;
   overflow: visible;
-  padding-bottom: 1.75rem;
-  transform: translateX(2rem);
+  padding-bottom: 0;
 }
 
 /* Globe circle sits behind the person */
@@ -287,9 +281,10 @@ section {
   position: absolute;
   left: 50%;
   bottom: -28%;
-  transform: translateX(calc(-50% - 2.75rem));
+  /* Offset in % (of the globe's own width) so it tracks the student at any scale */
+  transform: translateX(calc(-50% - 6%));
   width: 88%;
-  max-width: 26rem;
+  max-width: none;
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
@@ -322,18 +317,18 @@ section {
   object-fit: contain;
   object-position: right bottom;
   display: block;
-  transform: translate(1.5rem, 4.25rem) scale(1.24);
-  transform-origin: 92% 100%;
+  /* % translate is relative to the image's own box, so the dip onto the info
+     bar stays proportional at every width — no fixed rem that clips when small */
+  transform: translateY(7%);
+  transform-origin: bottom center;
 }
 
 .hero-right {
   width: 100%;
-  max-width: 22.5rem;
+  max-width: 24rem;
   justify-self: end;
   align-self: start;
-  margin-top: 0;
-  margin-left: 1.25rem;
-  margin-right: -1.25rem;
+  margin: 0;
   flex-shrink: 0;
   position: relative;
   z-index: 1;
@@ -469,7 +464,7 @@ section {
   background: linear-gradient(90deg, #311b92 0%, #3949ab 35%, #00bcd4 100%);
   padding: 22px 0 24px;
   margin: 0;
-  margin-top: 0.75rem;
+  margin-top: 0;
   width: 100%;
   max-width: 100%;
   position: relative;
@@ -524,16 +519,11 @@ section {
   font-weight: 700;
 }
 
+/* Wider desktop: only widen the page gutter. Everything else (type, columns,
+   image, form) is already fluid, so there are no per-breakpoint layout jumps —
+   the hero simply scales proportionally as the CSS viewport changes with the
+   Windows display-scaling level. */
 @media screen and (min-width: 1200px) {
-  .header-logo-img {
-    max-height: 105px;
-    max-width: 400px;
-  }
-
-  .header-logo-ideas {
-    max-width: 360px;
-  }
-
   .hero-section {
     --hero-edge-left: 24px;
     --hero-edge-right: 48px;
@@ -543,129 +533,22 @@ section {
     padding-left: var(--hero-edge-left);
     padding-right: var(--hero-edge-right);
   }
-
-  .hero-main {
-    padding-bottom: 2rem;
-    column-gap: 1rem;
-  }
-
-  .hero-info-bar {
-    padding: 22px 0 24px;
-    margin-top: 0.75rem;
-  }
-
-  .hero-student-stack {
-    max-width: 40rem;
-  }
-
-  .hero-right {
-    margin-left: 1.5rem;
-    margin-right: -2rem;
-    margin-top: -0.5rem;
-  }
-
-  .hero-subtitle {
-    font-size: 22px;
-  }
-
-  .hero-info-item,
-  .hero-info-item strong,
-  .hero-info-item span {
-    font-size: 18px;
-    font-weight: 700;
-  }
 }
 
-/* 100% browser zoom — wide viewport (≥1320px) */
-@media screen and (min-width: 1320px) {
-  .hero-section .hero-container {
-    flex: 0 1 auto;
-    justify-content: flex-start;
-    min-height: 0;
-  }
-
-  .hero-main {
-    flex: 0 1 auto;
-    padding-bottom: 0.25rem;
-  }
-
-  .hero-header {
-    padding: 6px 0 4px;
-  }
-
-  .header-logo-img {
-    max-height: 90px;
-  }
-
-  .hero-student-img {
-    transform: translate(1.25rem, 3.35rem) scale(1.16);
-  }
-
-  .hero-info-bar {
-    flex: 0 0 auto;
-    flex-shrink: 0;
-    margin-top: 0.75rem;
-    padding: 18px 0 22px;
-    overflow: visible;
-  }
-
-  .hero-section .hero-right {
-    align-self: end !important;
-    margin-top: 5.5rem !important;
-    transform: none !important;
-  }
-}
-
-/* 125% browser zoom — narrower viewport (<1320px); keep enquire placement, fit info bar */
-@media screen and (min-width: 992px) and (max-width: 1319px) {
+/* Desktop: make the hero banner (logos + content + info bar) fill the first
+   screen so the next section ("What's in it for you?") stays below the fold.
+   min-height (not height) means the hero only grows to fill a tall viewport and
+   never clips when content is taller than the screen — so at 125% scaling, where
+   the content already fills, nothing changes. space-between keeps the logos at
+   the top and the content anchored to the bottom on the info bar. */
+@media screen and (min-width: 1200px) {
   .hero-section {
-    min-height: auto;
-    justify-content: flex-start;
+    min-height: 100svh;
   }
 
   .hero-section .hero-container {
-    flex: 0 1 auto;
-    justify-content: flex-start;
-  }
-
-  .hero-main {
-    flex: 0 1 auto;
-    padding-bottom: 0.25rem;
-  }
-
-  .hero-header {
-    padding: 6px 0 4px;
-  }
-
-  .header-logo-img {
-    max-height: 82px;
-  }
-
-  .hero-student-img {
-    transform: translate(1.1rem, 2.85rem) scale(1.1);
-  }
-
-  .hero-info-bar {
-    flex-shrink: 0;
-    margin-top: 0.75rem;
-    padding: 16px 0 20px;
-  }
-
-  .hero-section .hero-right {
-    align-self: start !important;
-    transform: none !important;
-  }
-}
-
-@media screen and (min-width: 1200px) and (max-width: 1319px) {
-  .hero-section .hero-right {
-    margin-top: -0.5rem !important;
-  }
-}
-
-@media screen and (min-width: 992px) and (max-width: 1199px) {
-  .hero-section .hero-right {
-    margin-top: 0 !important;
+    flex: 1 1 auto;
+    justify-content: space-between;
   }
 }
 
@@ -702,6 +585,9 @@ section {
   }
 
   .hero-student-stack {
+    /* Reset the desktop column-relative width so the stack can't overflow
+       once the hero switches to a single centered column */
+    width: 100%;
     max-width: min(36rem, 100%);
   }
 
@@ -3300,7 +3186,9 @@ section {
 
 .enquire-card {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
   border-radius: 40px;
   overflow: hidden;
   box-shadow: 0 12px 40px rgba(26, 31, 92, 0.16);
@@ -3311,6 +3199,7 @@ section {
 .enquire-form-panel {
   background: linear-gradient(135deg, #2b1f84 0%, #5a22d1 48%, #008dd2 100%);
   padding: 2rem 2rem 1.75rem;
+  width: 100%;
 }
 
 .enquire-info-panel {
@@ -3318,8 +3207,9 @@ section {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 3rem 2.5rem;
-  min-height: 420px;
+  padding: 2.5rem 2.5rem 3rem;
+  min-height: auto;
+  width: 100%;
 }
 
 .enquire-npf-scroll {
@@ -3345,6 +3235,7 @@ section {
   border-radius: 3px;
 }
 
+/* Enquire form fields — stack vertically inside NPF widget */
 .enquire-form-panel .npf_wgts,
 .enquire-form-panel .npf_wgts iframe {
   display: block;
@@ -3353,6 +3244,20 @@ section {
   min-height: 520px;
   border: none;
   background: transparent;
+}
+
+.enquire-form-panel .npf_wgts form,
+.enquire-form-panel .npf_wgts .form-group,
+.enquire-form-panel .npf_wgts .row {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+}
+
+.enquire-form-panel .npf_wgts [class*="col-"] {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
 }
 
 .enquire-section .form-container {
@@ -3439,6 +3344,11 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.enquire-info-panel .info-section {
+  text-align: center;
+  align-items: center;
 }
 
 .enquire-info-panel .info-section h2 {
