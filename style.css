@@ -595,7 +595,10 @@ section {
 
   .hero-info-bar {
     flex: 0 0 auto;
-    margin-top: -18px;
+    /* Nudge only the info bar up ~15–28px (responsive, height-based). Transform
+       actually moves it — unlike margin-top, which the flex:1 container absorbs.
+       Layout, hero height, and every other element stay unchanged. */
+    transform: translateY(clamp(-1.75rem, -2vh, -0.9375rem));
   }
 
   .hero-section .hero-enquiry-card {
