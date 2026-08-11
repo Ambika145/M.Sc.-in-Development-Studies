@@ -154,6 +154,13 @@ textarea:focus-visible,
     margin-right: 0 !important;
   }
 
+  .hero-scholarship-bar {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
   .hero-right {
     top: 0 !important;
     max-width: min(420px, 100%);
@@ -445,6 +452,10 @@ textarea:focus-visible,
   }
 
   .hero-info-bar {
+    margin-top: 0;
+  }
+
+  .hero-scholarship-bar {
     margin-top: 0;
   }
 

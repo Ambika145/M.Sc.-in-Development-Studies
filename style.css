@@ -530,6 +530,36 @@ section {
   font-weight: 700;
 }
 
+.hero-scholarship-bar {
+  background: linear-gradient(90deg, #311b92 0%, #3949ab 35%, #00bcd4 100%);
+  padding: 18px 24px;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  z-index: 20;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+@media screen and (min-width: 992px) {
+  .hero-scholarship-bar {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+}
+
+.hero-scholarship-text {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
 /* Wider desktop: only widen the page gutter. Everything else (type, columns,
    image, form) is already fluid, so there are no per-breakpoint layout jumps —
    the hero simply scales proportionally as the CSS viewport changes with the
@@ -598,6 +628,11 @@ section {
     /* Nudge only the info bar up ~15–28px (responsive, height-based). Transform
        actually moves it — unlike margin-top, which the flex:1 container absorbs.
        Layout, hero height, and every other element stay unchanged. */
+    transform: translateY(clamp(-1.75rem, -2vh, -0.9375rem));
+  }
+
+  .hero-scholarship-bar {
+    flex: 0 0 auto;
     transform: translateY(clamp(-1.75rem, -2vh, -0.9375rem));
   }
 
